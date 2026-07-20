@@ -431,6 +431,20 @@ strong {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: clamp(14px, 1.6vw, 22px);
   width: 100%;
+  overflow-y: auto;
+  max-height: 55vh;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hair) transparent;
+}
+.stat-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.stat-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.stat-grid::-webkit-scrollbar-thumb {
+  background: var(--hair);
+  border-radius: 3px;
 }
 .stat-cell {
   display: flex;
