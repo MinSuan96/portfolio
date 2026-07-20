@@ -1,40 +1,23 @@
+import { useState } from 'react';
 import Deck from './deck/Deck';
 import Slide from './deck/Slide';
 import Build from './deck/Build';
 import Reveal from './deck/Reveal';
-import Bento from './components/Bento';
-import Split from './components/Split';
-import CountUp from './components/CountUp';
-import TiltCard from './components/TiltCard';
-import Marquee from './components/Marquee';
-import VisualDashboard from './components/VisualDashboard';
-import StatGrid from './components/StatGrid';
-import Accordion from './components/Accordion';
-import Comparison from './components/Comparison';
-import Tabs from './components/Tabs';
-import Timeline from './components/Timeline';
-import CodeWindow from './components/CodeWindow';
-import BrowserFrame from './components/BrowserFrame';
-import SpotlightCard from './components/SpotlightCard';
-import { BarChart, LineChart, DonutChart } from './components/Charts';
-import Section from './components/Section';
-import Quote from './components/Quote';
-import Pricing from './components/Pricing';
-import Steps from './components/Steps';
-import Agenda from './components/Agenda';
-import Team from './components/Team';
 import Cover from './components/Cover';
+import Split from './components/Split';
+import StatGrid from './components/StatGrid';
+import Timeline from './components/Timeline';
 import BigNumber from './components/BigNumber';
-import Contrast from './components/Contrast';
-import Chat from './components/Chat';
-import Table from './components/Table';
-import Globe from './components/Globe';
+import Quote from './components/Quote';
+import Section from './components/Section';
+import CountUp from './components/CountUp';
 
 /* ══════════════════════════════════════════════════════════════════════
-   ⚠️  THROWAWAY DEMO showing every component. DELETE these slides and AUTHOR
-   THE USER'S DECK. Each child of <Deck> is one slide. Add speaker notes with
-   notes="…" on any slide (shown in presenter mode — press P).
+   MINSUANTEH — Portfolio Deck
+   Personal web profile → paged deck experience
+   Theme: Dark, warm amber accent (tokens.css :root)
    ══════════════════════════════════════════════════════════════════════ */
+
 const panel = (extra = 0.22): React.CSSProperties => ({
   position: 'absolute',
   inset: 0,
@@ -42,936 +25,467 @@ const panel = (extra = 0.22): React.CSSProperties => ({
     extra * 100
   }%, transparent), transparent 60%), var(--surface-2)`,
 });
-const card: React.CSSProperties = {
-  padding: 22,
-  borderRadius: 'var(--radius)',
-  background: 'var(--surface)',
-  border: '1px solid var(--hair)',
-};
 
-export default function App() {
+/* ── Landing Page ───────────────────────────────────────────────────── */
+function Landing({ onEnter }: { onEnter: () => void }) {
   return (
-    <Deck>
-      {/* Cover */}
-      <Cover
-        nav="Cover"
-        notes="Welcome — introduce yourself, then set up the problem. Hold a beat on this slide."
-        kicker="Bolt Slides · Component demo"
-        title={<span className="accent-text">Bolt Slides</span>}
-        subtitle="A responsive React deck engine. Delete this and build the real one."
-        foot="June 2026 · Component demo"
-      />
-
-      {/* Statement + click-build */}
-      <Slide
-        center
-        nav="Thesis"
-        notes="Pause before revealing the second line. The whole pitch hangs on this contrast."
-      >
-        <h2
-          className="headline"
-          style={{ fontSize: 'clamp(34px,5.5vw,68px)', marginInline: 'auto' }}
-        >
-          Dashboards are everywhere.{' '}
-          <span className="accent-text">Insight isn't.</span>
-        </h2>
-        <Build at={1}>
-          <p className="subhead" style={{ marginTop: 20 }}>
-            Bolt Slides turns raw events into answers — automatically.
-          </p>
-        </Build>
-      </Slide>
-
-      {/* Agenda */}
-      <Agenda
-        nav="Agenda"
-        notes="Thirty seconds max — just orient the room, then move."
-        kicker="Agenda"
-        title="What we'll cover."
-        items={[
-          'The problem',
-          'How Bolt Slides works',
-          'Proof it compounds',
-          { title: 'Pricing & the ask', hint: '5 min' },
-        ]}
-      />
-
-      {/* Contrast — the problem */}
-      <Contrast
-        nav="The problem"
-        notes="Let the left panel sting for a second before you talk to the right one."
-        kicker="The shift"
-        title="Stop digging. Start asking."
-        left={{
-          label: 'Before',
-          title: 'Dashboard sprawl',
-          points: [
-            'Forty dashboards, zero answers',
-            'Analysts as human query engines',
-            'Insights arrive a week late',
-          ],
+      <div
+        style={{
+          height: '100vh',
+          width: '100vw',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'var(--bg)',
+          position: 'relative',
+          overflow: 'hidden',
+          cursor: 'default',
         }}
-        right={{
-          label: 'With Bolt Slides',
-          title: 'Answers on tap',
-          points: [
-            'Ask in plain English',
-            'Sub-second, source-linked answers',
-            'Alerts before the dashboard knows',
-          ],
+      >
+      {/* Atmosphere */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: `radial-gradient(44% 50% at 24% 16%, var(--bg-grad-1), transparent 60%),
+                       radial-gradient(50% 56% at 82% 88%, var(--bg-grad-2), transparent 62%)`,
+          animation: 'drift 26s cubic-bezier(0.32, 0.72, 0, 1) infinite alternate',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.035,
+          mixBlendMode: 'overlay',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          pointerEvents: 'none',
         }}
       />
 
-      {/* Split feature */}
-      <Split
-        nav="Realtime"
-        notes="Emphasize sub-second latency. Point at the live chart while you talk."
-        kicker="Realtime"
-        title={
-          <>
-            Everything, <span className="accent-text">as it happens.</span>
-          </>
-        }
-        body="Live metrics with sub-second latency — no pipelines to babysit."
-        media={
-          <>
-            <div style={panel(0.22)} />
-            <div
-              style={{
-                position: 'relative',
-                padding: 'clamp(14px,3vw,40px)',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <TiltCard>
-                <VisualDashboard />
-              </TiltCard>
-            </div>
-          </>
-        }
-      />
-
-      {/* Bento */}
-      <Bento
-        nav="Platform"
-        notes="Don't read every tile — let them scan. Land on throughput and uptime."
-        kicker="One platform"
-        title="Everything in one place."
-        tiles={[
-          {
-            k: 'Throughput',
-            fig: <CountUp to={9.4} decimals={1} suffix="M" />,
-            body: 'events / min at peak.',
-            c: 5,
-            r: 2,
-            variant: 'glow',
-          },
-          {
-            k: 'Uptime',
-            fig: <CountUp to={99.99} decimals={2} suffix="%" />,
-            c: 4,
-          },
-          { k: 'Regions', fig: <CountUp to={28} />, c: 3, variant: 'accent' },
-          {
-            k: 'Connectors',
-            title: '120+ native',
-            body: 'Snowflake, Kafka, dbt…',
-            c: 4,
-          },
-          { k: 'Compliance', title: 'SOC 2 · HIPAA', c: 3 },
-        ]}
-      />
-
-      {/* Globe */}
-      <Globe
-        nav="Global"
-        notes="Spin it if you like — the markers are our actual regions. Land on the APAC number."
-        kicker="28 regions"
-        title={
-          <>
-            Everywhere your <span className="accent-text">data lives.</span>
-          </>
-        }
-        body="Ingest close to the source; answer from the nearest edge."
-        markers={[
-          {
-            location: [37.77, -122.41],
-            size: 0.08,
-            label: 'sfo1',
-            value: '221k evt/s',
-          },
-          { location: [40.71, -74.0], size: 0.08 },
-          {
-            location: [51.5, -0.12],
-            size: 0.07,
-            label: 'lhr1',
-            value: '188k evt/s',
-          },
-          { location: [52.52, 13.4], size: 0.05 },
-          {
-            location: [1.35, 103.82],
-            size: 0.07,
-            label: 'sin1',
-            value: '96k evt/s',
-          },
-          { location: [35.68, 139.69], size: 0.06 },
-          { location: [-33.87, 151.2], size: 0.05 },
-          { location: [-23.55, -46.63], size: 0.05 },
-        ]}
-        arcs={[
-          { from: [37.77, -122.41], to: [51.5, -0.12] },
-          { from: [51.5, -0.12], to: [1.35, 103.82] },
-          { from: [37.77, -122.41], to: [-23.55, -46.63] },
-        ]}
-        stats={[
-          { value: '48%', label: 'North America' },
-          { value: '31%', label: 'EMEA' },
-          { value: '21%', label: 'APAC + LATAM' },
-        ]}
-      />
-
-      {/* StatGrid — traction */}
-      <StatGrid
-        nav="Traction"
-        notes="These are the headline numbers investors remember. Say ARR is up 3× out loud."
-        kicker="Traction"
-        title="Numbers that compound."
-        stats={[
-          {
-            value: <CountUp to={4.2} decimals={1} prefix="$" suffix="M" />,
-            label: 'ARR',
-            caption: 'up 3× year over year',
-          },
-          {
-            value: <CountUp to={92} suffix="%" />,
-            label: 'Net retention',
-            caption: 'best in class',
-          },
-          {
-            value: <CountUp to={120} suffix="+" />,
-            label: 'Enterprise logos',
-            caption: 'across six industries',
-          },
-        ]}
-      />
-
-      {/* BigNumber */}
-      <BigNumber
-        nav="Big number"
-        notes="Let the number breathe. One sentence of context, then move."
-        kicker="Every day"
-        value={<CountUp to={2.4} decimals={1} suffix="B" />}
-        caption="events answered in under a second."
-        foot="Production traffic, trailing 30 days"
-      />
-
-      {/* Section divider */}
-      <Section
-        nav="Part two"
-        notes="Breathe. New chapter."
-        n={2}
-        kicker="Part two"
-        title={
-          <>
-            How it <span className="accent-text">works.</span>
-          </>
-        }
-      />
-
-      {/* Steps */}
-      <Steps
-        nav="How it works"
-        notes="Walk left to right. The point is that step three is where competitors stop."
-        kicker="How it works"
-        title="Three steps to live data."
-        items={[
-          {
-            title: 'Connect',
-            body: 'Point Bolt Slides at your warehouse or event stream. No schema to define.',
-          },
-          {
-            title: 'Model',
-            body: 'It learns your entities and builds the metric graph automatically.',
-          },
-          {
-            title: 'Act',
-            body: 'Ask questions in plain English; alerts fire before dashboards notice.',
-          },
-        ]}
-      />
-
-      {/* Chat */}
-      <Chat
-        nav="Ask anything"
-        notes="Click through the exchange one message at a time — pause after the answer lands."
-        kicker="Ask anything"
-        title="Plain English in. Answers out."
-        name="Bolt Slides"
-        messages={[
-          { from: 'user', text: 'Why did signups dip last week?' },
-          {
-            from: 'ai',
-            text: 'Signups fell 12% after Tuesday’s pricing-page change. The drop is entirely mobile — desktop is flat.',
-          },
-          { from: 'user', text: 'Roll it back for mobile only?' },
-          {
-            from: 'ai',
-            text: 'Done. I’ll alert you when the trend recovers — based on current traffic, roughly 6 hours.',
-          },
-        ]}
-      />
-
-      {/* Comparison */}
-      <Slide
-        nav="Comparison"
-        notes="Lead with realtime. If they push on price, point at the highlighted column."
+      {/* Profile image */}
+      <div
+        style={{
+          width: 'clamp(100px, 14vw, 160px)',
+          height: 'clamp(100px, 14vw, 160px)',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          marginBottom: 'clamp(24px, 4vh, 40px)',
+          border: '2px solid var(--hair)',
+          boxShadow: '0 0 40px -10px color-mix(in srgb, var(--primary) 40%, transparent)',
+          flexShrink: 0,
+        }}
       >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            Why teams switch
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(22px,4vh,38px)',
-            }}
-          >
-            The honest comparison.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div style={{ maxWidth: 820, marginInline: 'auto' }}>
-            <Comparison
-              cols={['', 'Bolt Slides', 'Legacy tools']}
-              highlight={0}
-              rows={[
-                { label: 'Realtime by default', values: [true, false] },
-                { label: 'Self-host option', values: [true, false] },
-                {
-                  label: 'Time to first insight',
-                  values: ['5 min', '2 weeks'],
-                },
-                { label: 'Starting price', values: ['$29', '$99'] },
-              ]}
-            />
-          </div>
-        </Reveal>
-      </Slide>
-
-      {/* Tabs */}
-      <Slide
-        nav="Use cases"
-        notes="Click through the tabs as you speak to each team. Stop on the one that fits the room."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            One platform
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(20px,3vh,30px)',
-            }}
-          >
-            Built for every team.
-          </h2>
-        </Reveal>
-        <Reveal
-          style={{ textAlign: 'center', maxWidth: 780, marginInline: 'auto' }}
-        >
-          <Tabs
-            tabs={[
-              {
-                label: 'Engineering',
-                content: (
-                  <p className="lead">
-                    Trace any request end-to-end, alert on anomalies, ship with
-                    confidence.
-                  </p>
-                ),
-              },
-              {
-                label: 'Data',
-                content: (
-                  <div style={{ height: 180 }}>
-                    <BarChart
-                      data={[
-                        { label: 'Mon', value: 38 },
-                        { label: 'Tue', value: 55 },
-                        { label: 'Wed', value: 47 },
-                        { label: 'Thu', value: 72 },
-                        { label: 'Fri', value: 90 },
-                      ]}
-                      height={180}
-                    />
-                  </div>
-                ),
-              },
-              {
-                label: 'Ops',
-                content: (
-                  <p className="lead">
-                    One source of truth for uptime, cost, and capacity — no
-                    spreadsheets.
-                  </p>
-                ),
-              },
-            ]}
-          />
-        </Reveal>
-      </Slide>
-
-      {/* Split + code */}
-      <Split
-        nav="Developer-first"
-        notes="Three lines, no schema. If there's an engineer in the room, this is the slide for them."
-        kicker="Developer-first"
-        title={
-          <>
-            Drop-in <span className="accent-text">simple.</span>
-          </>
-        }
-        body="Add it to your app in three lines. No SDK to learn, no schema to define."
-        media={
-          <>
-            <div style={panel(0.16)} />
-            <div style={{ position: 'relative', padding: 36, width: '100%' }}>
-              <CodeWindow
-                title="app.ts"
-                highlight={[3]}
-                code={`import { track } from '@bolt-slides/sdk'
-
-track('signup', {
-  plan: 'pro',
-  source: 'landing',
-})`}
-              />
-            </div>
-          </>
-        }
-      />
-
-      {/* Browser frame */}
-      <Slide
-        center
-        nav="Product"
-        notes="Demo the real thing if you can. Otherwise walk the screen top to bottom."
-      >
-        <Reveal>
-          <div className="kicker" style={{ marginBottom: 14 }}>
-            See it live
-          </div>
-          <h2
-            className="headline"
-            style={{
-              fontSize: 'clamp(30px,4.4vw,52px)',
-              marginInline: 'auto',
-              marginBottom: 'clamp(18px,3vh,28px)',
-            }}
-          >
-            Your data, one screen.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div style={{ maxWidth: 800, marginInline: 'auto', width: '100%' }}>
-            <BrowserFrame url="app.boltslides.dev">
-              <div
-                className="appmock"
-                style={{ minHeight: 'clamp(280px, 42vh, 372px)' }}
-              >
-                <div
-                  className="hide-narrow"
-                  style={{
-                    borderRight: '1px solid var(--hair-2)',
-                    background: 'var(--surface)',
-                    padding: '18px 14px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 4,
-                  }}
-                >
-                  <div
-                    className="kicker"
-                    style={{ marginBottom: 12, paddingLeft: 8 }}
-                  >
-                    Bolt Slides
-                  </div>
-                  {['Overview', 'Events', 'Funnels', 'Cohorts', 'Settings'].map(
-                    (n, i) => (
-                      <div
-                        key={n}
-                        style={{
-                          padding: '8px 12px',
-                          borderRadius: 9,
-                          fontSize: 14,
-                          fontWeight: i === 0 ? 600 : 400,
-                          color:
-                            i === 0 ? 'var(--accent-ink)' : 'var(--fg-muted)',
-                          background: i === 0 ? 'var(--accent)' : 'transparent',
-                        }}
-                      >
-                        {n}
-                      </div>
-                    )
-                  )}
-                </div>
-                <div style={{ padding: '20px 24px', textAlign: 'left' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      justifyContent: 'space-between',
-                      marginBottom: 16,
-                    }}
-                  >
-                    <h3 style={{ fontSize: 19, fontWeight: 600, margin: 0 }}>
-                      Overview
-                    </h3>
-                    <span className="foot">Last 30 days</span>
-                  </div>
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns:
-                        'repeat(auto-fit, minmax(min(110px, 100%), 1fr))',
-                      gap: 12,
-                      marginBottom: 16,
-                    }}
-                  >
-                    {[
-                      ['Revenue', '$1.24M', '▲ 18.2%'],
-                      ['Active users', '48,210', '▲ 9.4%'],
-                      ['Churn', '1.9%', '▼ 0.6%'],
-                    ].map(([l, v, d]) => (
-                      <div key={l} style={{ ...card, padding: 14 }}>
-                        <div className="foot" style={{ marginBottom: 5 }}>
-                          {l}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 23,
-                            fontWeight: 600,
-                            letterSpacing: '-0.02em',
-                            fontVariantNumeric: 'tabular-nums',
-                          }}
-                        >
-                          {v}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 12,
-                            fontWeight: 600,
-                            color: 'var(--primary)',
-                            marginTop: 4,
-                          }}
-                        >
-                          {d}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div style={{ ...card, padding: 16 }}>
-                    <LineChart
-                      points={[12, 16, 14, 22, 26, 34, 30, 44]}
-                      height={120}
-                    />
-                  </div>
-                </div>
-              </div>
-            </BrowserFrame>
-          </div>
-        </Reveal>
-      </Slide>
-
-      {/* Charts */}
-      <Slide
-        nav="Metrics"
-        notes="Net retention at 94% is the one to call out — it means the product sells itself."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            The numbers
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(22px,4vh,38px)',
-            }}
-          >
-            Growth you can see.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="cols">
-            <div style={card}>
-              <div className="kicker" style={{ marginBottom: 14 }}>
-                Weekly active
-              </div>
-              <div style={{ height: 150 }}>
-                <BarChart
-                  data={[
-                    { label: 'W1', value: 30 },
-                    { label: 'W2', value: 44 },
-                    { label: 'W3', value: 39 },
-                    { label: 'W4', value: 61 },
-                    { label: 'W5', value: 78 },
-                    { label: 'W6', value: 96 },
-                  ]}
-                  height={150}
-                />
-              </div>
-            </div>
-            <div style={card}>
-              <div className="kicker" style={{ marginBottom: 14 }}>
-                Revenue
-              </div>
-              <LineChart
-                points={[12, 16, 14, 22, 26, 34, 30, 44]}
-                height={150}
-              />
-            </div>
-            <div
-              style={{
-                ...card,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <DonutChart value={94} label="Net retention" size={150} />
-            </div>
-          </div>
-        </Reveal>
-      </Slide>
-
-      {/* Data table */}
-      <Slide
-        nav="Unit economics"
-        notes="Walk the growth column top to bottom — APAC is the story."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            Unit economics
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(22px,4vh,38px)',
-            }}
-          >
-            Growth, by region.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <Table
-            columns={['Region', 'ARR', 'Growth', 'NRR', 'Payback']}
-            rows={[
-              ['North America', '$2.4M', '+38%', '124%', '11 mo'],
-              ['Europe', '$1.1M', '+52%', '118%', '13 mo'],
-              ['APAC', '$0.7M', '+61%', '109%', '14 mo'],
-              ['LATAM', '$0.2M', '+44%', '104%', '16 mo'],
-            ]}
-            highlightCol={2}
-            caption="Company data, FY25 · NRR = net revenue retention"
-          />
-        </Reveal>
-      </Slide>
-
-      {/* Timeline */}
-      <Slide
-        nav="Roadmap"
-        notes="Anchor on 'Now'. The AI insights line is what gets people excited — dwell there."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            Where we're going
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(20px,3vh,32px)',
-            }}
-          >
-            The roadmap.
-          </h2>
-        </Reveal>
-        <div style={{ maxWidth: 560, marginInline: 'auto' }}>
-          <Timeline
-            items={[
-              {
-                time: 'Shipped',
-                title: 'Realtime core',
-                body: 'Sub-second metrics across 28 regions.',
-              },
-              {
-                time: 'Now',
-                title: 'AI insights',
-                body: 'Plain-English answers from your data.',
-              },
-              {
-                time: 'Next',
-                title: 'Enterprise',
-                body: 'SSO, audit logs, and on-prem.',
-              },
-            ]}
-          />
-        </div>
-      </Slide>
-
-      {/* Pricing */}
-      <Pricing
-        nav="Pricing"
-        notes="Anchor on Pro. Enterprise exists so Pro looks reasonable — don't oversell it."
-        kicker="Pricing"
-        title="Simple, honest plans."
-        tiers={[
-          {
-            name: 'Starter',
-            price: '$29',
-            period: '/mo',
-            blurb: 'For small teams getting live.',
-            features: [
-              '1M events / month',
-              'Realtime dashboards',
-              'Community support',
-            ],
-          },
-          {
-            name: 'Pro',
-            price: '$79',
-            period: '/mo',
-            blurb: 'Everything growing teams need.',
-            features: [
-              '10M events / month',
-              'AI insights + alerts',
-              'Self-host option',
-              'Priority support',
-            ],
-            highlight: true,
-          },
-          {
-            name: 'Enterprise',
-            price: 'Custom',
-            blurb: 'Scale, compliance, and control.',
-            features: [
-              'Unlimited events',
-              'SSO + audit logs',
-              'On-prem deploy',
-              'Dedicated CSM',
-            ],
-          },
-        ]}
-      />
-
-      {/* Spotlight principles */}
-      <Slide
-        nav="Principles"
-        notes="Hover the cards for the glow if presenting on a screen. Keep this one short."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            What we believe
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(22px,4vh,38px)',
-            }}
-          >
-            Three principles.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="cols">
-            {[
-              {
-                k: '01',
-                t: 'Fast by default',
-                d: 'Speed is a feature. Everything is realtime.',
-              },
-              {
-                k: '02',
-                t: 'Yours to own',
-                d: 'Your data, your infra, no lock-in.',
-              },
-              {
-                k: '03',
-                t: 'Honest pricing',
-                d: 'No per-seat tax. Scale without surprises.',
-              },
-            ].map((p) => (
-              <SpotlightCard key={p.k}>
-                <div
-                  className="kicker accent-text"
-                  style={{ marginBottom: 12 }}
-                >
-                  {p.k}
-                </div>
-                <h3
-                  style={{
-                    fontSize: 'clamp(20px,2.2vw,26px)',
-                    fontWeight: 600,
-                    margin: '0 0 8px',
-                  }}
-                >
-                  {p.t}
-                </h3>
-                <p
-                  style={{
-                    color: 'var(--fg-muted)',
-                    fontSize: 15,
-                    margin: 0,
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {p.d}
-                </p>
-              </SpotlightCard>
-            ))}
-          </div>
-        </Reveal>
-      </Slide>
-
-      {/* Accordion — FAQ */}
-      <Slide
-        nav="FAQ"
-        notes="Only open the questions they actually ask. Skip the rest to keep momentum."
-      >
-        <Reveal>
-          <div
-            className="kicker"
-            style={{ marginBottom: 12, textAlign: 'center' }}
-          >
-            Common questions
-          </div>
-          <h2
-            className="headline"
-            style={{
-              textAlign: 'center',
-              marginInline: 'auto',
-              marginBottom: 'clamp(20px,3vh,30px)',
-            }}
-          >
-            Frequently asked.
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div style={{ maxWidth: 720, marginInline: 'auto' }}>
-            <Accordion
-              items={[
-                {
-                  title: 'How long does setup take?',
-                  body: 'Five minutes — point Bolt Slides at your warehouse and you are live.',
-                },
-                {
-                  title: 'Can we self-host?',
-                  body: 'Yes. A Docker image and Terraform module ship with every plan.',
-                },
-                {
-                  title: 'How is it priced?',
-                  body: 'Flat monthly, no per-seat tax — you scale without surprises.',
-                },
-              ]}
-            />
-          </div>
-        </Reveal>
-      </Slide>
-
-      {/* Team */}
-      <Team
-        nav="Team"
-        notes="One line per person. The point is the operator pedigree, not the bios."
-        kicker="The team"
-        title="Built by operators."
-        people={[
-          { name: 'Dana Kim', role: 'CEO · ex-Stripe' },
-          { name: 'Ade Obi', role: 'CTO · ex-Datadog' },
-          { name: 'Mara Silva', role: 'Design · ex-Linear' },
-          { name: 'Jon Park', role: 'GTM · ex-Snowflake' },
-        ]}
-      />
-
-      {/* Logos */}
-      <Slide
-        center
-        nav="Customers"
-        notes="Name-drop the two logos most relevant to this audience."
-      >
-        <Reveal>
-          <div className="kicker" style={{ marginBottom: 28 }}>
-            Trusted by teams everywhere
-          </div>
-        </Reveal>
-        <Marquee
-          items={[
-            'Northwind',
-            'Globex',
-            'Initech',
-            'Umbra',
-            'Hooli',
-            'Vehement',
-            'Soylent',
-          ]}
+        <img
+          src="/me.png"
+          alt="Minsunteh"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
-      </Slide>
+      </div>
 
-      {/* Quote */}
-      <Quote
-        nav="Quote"
-        notes="Read it slowly, then stay silent for a second. Let it land."
-        text="We replaced four tools with Bolt Slides and never looked back."
-        name="Dana Kim"
-        role="VP Engineering, Acme"
-      />
-
-      {/* CTA */}
-      <Slide
-        center
-        nav="Close"
-        notes="Make the ask explicitly. Leave the contact details on screen while you take questions."
+      {/* Name */}
+      <h1
+        style={{
+          fontFamily: 'var(--font-head)',
+          fontWeight: 600,
+          letterSpacing: '-0.04em',
+          lineHeight: 0.98,
+          fontSize: 'clamp(44px, 8vw, 116px)',
+          margin: 0,
+          color: 'var(--fg)',
+          textAlign: 'center',
+        }}
       >
-        <Reveal>
-          <h2 className="display" style={{ fontSize: 'clamp(40px,7vw,96px)' }}>
-            <span className="accent-text">Let's talk.</span>
-          </h2>
-          <p className="subhead" style={{ marginTop: 16 }}>
-            hello@bolt.new
-          </p>
-        </Reveal>
-      </Slide>
-    </Deck>
+        <span className="accent-text">Minsunteh</span>
+      </h1>
+
+      {/* Title */}
+      <p
+        className="lead"
+        style={{
+          marginTop: 'clamp(12px, 2vh, 22px)',
+          textAlign: 'center',
+          maxWidth: '36ch',
+          color: 'var(--fg-muted)',
+        }}
+      >
+        Machine Learning Platform Engineer
+      </p>
+
+      {/* Social links */}
+      <div
+        style={{
+          display: 'flex',
+          gap: 'clamp(16px, 3vw, 32px)',
+          marginTop: 'clamp(20px, 3vh, 36px)',
+        }}
+      >
+        <a
+          href="https://github.com/MinSuan96"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'var(--fg-faint)',
+            textDecoration: 'none',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'clamp(12px, 1.2vw, 15px)',
+            letterSpacing: '0.07em',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+            transition: 'color 0.3s ease',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--fg-faint)')}
+        >
+          GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/minsuan-teh-8a0a31199/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'var(--fg-faint)',
+            textDecoration: 'none',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'clamp(12px, 1.2vw, 15px)',
+            letterSpacing: '0.07em',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+            transition: 'color 0.3s ease',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--fg-faint)')}
+        >
+          LinkedIn
+        </a>
+        <a
+          href="mailto:minsuan1104@hotmail.com"
+          style={{
+            color: 'var(--fg-faint)',
+            textDecoration: 'none',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'clamp(12px, 1.2vw, 15px)',
+            letterSpacing: '0.07em',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+            transition: 'color 0.3s ease',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--fg-faint)')}
+        >
+          Email
+        </a>
+      </div>
+
+      {/* Enter button */}
+      <button
+        onClick={onEnter}
+        style={{
+          marginTop: 'clamp(36px, 6vh, 60px)',
+          padding: '14px 40px',
+          borderRadius: '999px',
+          border: '1px solid var(--hair)',
+          background: 'var(--surface)',
+          color: 'var(--fg-muted)',
+          fontFamily: 'var(--font-body)',
+          fontSize: 'clamp(14px, 1.4vw, 17px)',
+          fontWeight: 500,
+          letterSpacing: '0.04em',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          backdropFilter: 'blur(10px)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+          e.currentTarget.style.color = 'var(--primary)';
+          e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'var(--hair)';
+          e.currentTarget.style.color = 'var(--fg-muted)';
+          e.currentTarget.style.boxShadow = 'none';
+        }}
+      >
+        Enter ↓
+      </button>
+    </div>
+  );
+}
+
+/* ── App ────────────────────────────────────────────────────────────── */
+export default function App() {
+  const [entered, setEntered] = useState(false);
+
+  return (
+    <div style={{ height: '100vh', overflow: 'hidden' }}>
+      {!entered ? (
+        <Landing onEnter={() => setEntered(true)} />
+      ) : (
+        <Deck>
+          {/* ── Cover ──────────────────────────────────────────────── */}
+          <Cover
+            nav="Cover"
+            notes="Welcome — hold here a beat."
+            kicker="minsuan.dev"
+            title={<span className="accent-text">Minsunteh</span>}
+            subtitle="Machine Learning Platform Engineer"
+            foot="Tencent Games · Kuala Lumpur"
+          />
+
+          {/* ── About ──────────────────────────────────────────────── */}
+          <Split
+            nav="About"
+            notes="Walk through the bio. Point at the photo."
+            kicker="About"
+            title="Greetings! 👋"
+            body="I'm a passionate individual with a love for gaming, problem-solving, and the ever-evolving world of coding. I hold an MSc and BEng in Computer Science from The University of Edinburgh, with a focus on machine learning."
+            media={
+              <div style={{ ...panel(0.18), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div
+                  style={{
+                    width: 'clamp(120px, 18vw, 220px)',
+                    height: 'clamp(120px, 18vw, 220px)',
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    border: '2px solid var(--hair)',
+                    boxShadow: '0 0 50px -15px color-mix(in srgb, var(--primary) 50%, transparent)',
+                  }}
+                >
+                  <img
+                    src="/me.png"
+                    alt="Minsunteh"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+              </div>
+            }
+          />
+
+          {/* ── Skills ─────────────────────────────────────────────── */}
+          <Slide center nav="Skills">
+            <Reveal>
+              <div className="kicker" style={{ marginBottom: 14, textAlign: 'center' }}>
+                Skills
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontSize: 'clamp(32px, 4.8vw, 60px)',
+                  marginInline: 'auto',
+                  marginBottom: 32,
+                }}
+              >
+                <span className="accent-text">Tech stack.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div className="stat-grid" style={{ maxWidth: 860, marginInline: 'auto' }}>
+                {[
+                  { label: 'Python', caption: 'Core language, AI/ML pipelines' },
+                  { label: 'PyTorch', caption: 'Model development, RL training' },
+                  { label: 'Machine Learning', caption: 'DNN, RL, NLP, generative AI' },
+                  { label: 'SQL', caption: 'Database querying, ELK pipelines' },
+                  { label: 'C++', caption: 'Performance-critical systems' },
+                  { label: 'Solidity', caption: 'Smart contract development' },
+                  { label: 'FFmpeg', caption: 'Audio processing, TTS pipelines' },
+                  { label: 'ELK Stack', caption: 'Elasticsearch, Logstash, Kibana' },
+                ].map((s, i) => (
+                  <div className="stat-cell" key={i}>
+                    <div className="stat-card">
+                      <span className="tick" />
+                      <div className="stat-label" style={{ background: 'var(--accent)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                        {s.label}
+                      </div>
+                      <div className="stat-caption">{s.caption}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </Slide>
+
+          {/* ── Section divider ────────────────────────────────────── */}
+          <Section
+            nav="Experience"
+            n={1}
+            kicker="Career"
+            title={
+              <>
+                Where I've{' '}
+                <span className="accent-text">worked.</span>
+              </>
+            }
+          />
+
+          {/* ── Experience ─────────────────────────────────────────── */}
+          <Slide center nav="Experience">
+            <Reveal>
+              <Timeline
+                items={[
+                  {
+                    time: '2026 — Present',
+                    title: 'Machine Learning Platform Engineer',
+                    body: 'Tencent Games — Developing internal AI tools and platforms for generative audio workflows, knowledge management, and data integration pipelines.',
+                  },
+                  {
+                    time: '2023 — 2024',
+                    title: 'Global Software Service Engineer',
+                    body: 'Huawei GSRC — Convergent Billing System harmonization for CelcomDigi merger. HTTP testing, SQL database manipulation, GUI validation.',
+                  },
+                  {
+                    time: '2023',
+                    title: 'Java Tutor and Marker',
+                    body: 'University of Edinburgh — Conducted weekly tutorials for 10 first-year informatics students, assessed coursework, provided feedback.',
+                  },
+                ]}
+              />
+            </Reveal>
+          </Slide>
+
+          {/* ── Section divider ────────────────────────────────────── */}
+          <Section
+            nav="Education"
+            n={2}
+            kicker="Education"
+            title={
+              <>
+                Where I've{' '}
+                <span className="accent-text">studied.</span>
+              </>
+            }
+          />
+
+          {/* ── Education ──────────────────────────────────────────── */}
+          <BigNumber
+            nav="Education"
+            kicker="Academic"
+            value={<CountUp to={2} suffix=" degrees" />}
+            caption={<>MSc & BEng in Computer Science — <span style={{ color: 'var(--primary)' }}>University of Edinburgh</span></>}
+            foot="MSc: Passed with Merit · BEng: First Class Honours"
+          />
+
+          {/* ── Languages ──────────────────────────────────────────── */}
+          <Slide center nav="Languages">
+            <Reveal>
+              <div className="kicker" style={{ marginBottom: 14, textAlign: 'center' }}>
+                Languages
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontSize: 'clamp(32px, 4.8vw, 60px)',
+                  marginInline: 'auto',
+                  marginBottom: 36,
+                }}
+              >
+                <span className="accent-text">Communication.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div className="cols" style={{ maxWidth: 720, marginInline: 'auto' }}>
+                {[
+                  { lang: 'Chinese', level: 'Native Speaker' },
+                  { lang: 'English', level: 'Full Professional' },
+                  { lang: 'Malay', level: 'Professional Working' },
+                ].map((l, i) => (
+                  <div
+                    key={i}
+                    className="mat"
+                    style={{
+                      borderRadius: 'var(--radius)',
+                      padding: 'clamp(20px, 2.4vw, 30px) clamp(18px, 2vw, 24px)',
+                      textAlign: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 8,
+                    }}
+                  >
+                    <span className="tick" style={{ marginBottom: 10 }} />
+                    <div style={{ fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', color: 'var(--fg)' }}>
+                      {l.lang}
+                    </div>
+                    <div style={{ fontSize: 'clamp(13px, 1.3vw, 15px)', color: 'var(--fg-faint)' }}>
+                      {l.level}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </Slide>
+
+          {/* ── CV Download ────────────────────────────────────────── */}
+          <Slide center nav="CV">
+            <Reveal>
+              <div className="kicker" style={{ marginBottom: 14, textAlign: 'center' }}>
+                Resume
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontSize: 'clamp(32px, 4.8vw, 60px)',
+                  marginInline: 'auto',
+                  marginBottom: 20,
+                }}
+              >
+                <span className="accent-text">Get the details.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p
+                className="subhead"
+                style={{ marginTop: 18, textAlign: 'center', maxWidth: '30ch', marginInline: 'auto' }}
+              >
+                Download my full engineering resume.
+              </p>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <a
+                href="/cv.pdf"
+                download
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  marginTop: 'clamp(28px, 5vh, 44px)',
+                  padding: '14px 36px',
+                  borderRadius: '999px',
+                  border: '1px solid var(--hair)',
+                  background: 'var(--surface)',
+                  color: 'var(--primary)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'clamp(14px, 1.4vw, 17px)',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+                  e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--hair)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                EngineeringResumes.pdf ↓
+              </a>
+            </Reveal>
+          </Slide>
+
+          {/* ── Close / CTA ────────────────────────────────────────── */}
+          <Quote
+            nav="Connect"
+            notes="Read it. Let the contact links sink in."
+            text="Let's connect and delve deeper into the fascinating worlds of technology, gaming, and music!"
+            name="Minsunteh"
+            role="minsuan.dev"
+          />
+        </Deck>
+      )}
+    </div>
   );
 }

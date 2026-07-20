@@ -6,31 +6,31 @@
    =================================================================== */
 :root {
   /* Surfaces */
-  --bg: #05070a;
-  --bg-grad-1: rgba(79, 229, 176, 0.12);
-  --bg-grad-2: rgba(41, 192, 240, 0.08);
-  --surface: rgba(255, 255, 255, 0.045);
-  --surface-2: rgba(255, 255, 255, 0.07);
+  --bg: #0a0a0c;
+  --bg-grad-1: rgba(240, 192, 64, 0.10);
+  --bg-grad-2: rgba(224, 140, 40, 0.07);
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.065);
 
   /* Ink */
-  --fg: #f4f7fa;
-  --fg-muted: #9aa4b2;
-  --fg-faint: #626d7d;
+  --fg: #f0ece4;
+  --fg-muted: #9a9490;
+  --fg-faint: #6a6460;
 
   /* Hairlines */
-  --hair: rgba(255, 255, 255, 0.1);
-  --hair-2: rgba(255, 255, 255, 0.06);
+  --hair: rgba(255, 255, 255, 0.09);
+  --hair-2: rgba(255, 255, 255, 0.055);
 
-  /* Accent — ONE accent. May be a 2–4 stop gradient within ~80° of hue. */
-  --primary: #4fe5b0;
+  /* Accent — warm amber/gold */
+  --primary: #f0c040;
   --accent: linear-gradient(
     115deg,
-    #c8f56e 0%,
-    #5aeeb0 42%,
-    #34dcd8 74%,
-    #29c0f0 100%
+    #f0c040 0%,
+    #e8a830 42%,
+    #d89028 74%,
+    #c87820 100%
   );
-  --accent-ink: #04140e;
+  --accent-ink: #1a1200;
 
   /* Radius */
   --radius: 22px;
