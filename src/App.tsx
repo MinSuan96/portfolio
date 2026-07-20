@@ -452,7 +452,7 @@ export default function App() {
             </Reveal>
             <Reveal delay={0.25}>
               <a
-                href="/assets/pdf/EngineeringResumes.pdf"
+                href="/assets/pdf/resume.pdf"
                 download
                 style={{
                   display: 'inline-flex',
@@ -480,7 +480,7 @@ export default function App() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                EngineeringResumes.pdf ↓
+                resume.pdf ↓
               </a>
             </Reveal>
           </Slide>
