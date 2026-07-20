@@ -78,11 +78,11 @@ function Landing({ onEnter }: { onEnter: () => void }) {
           flexShrink: 0,
         }}
       >
-        <img
-          src="/me.png"
-          alt="Minsunteh"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-        />
+          <img
+            src="/assets/img/me.png"
+            alt="Minsuan Teh"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
       </div>
 
       {/* Name */}
@@ -98,7 +98,7 @@ function Landing({ onEnter }: { onEnter: () => void }) {
           textAlign: 'center',
         }}
       >
-        <span className="accent-text">Minsunteh</span>
+        <span className="accent-text">Minsuan Teh</span>
       </h1>
 
       {/* Title */}
@@ -228,10 +228,10 @@ export default function App() {
           <Cover
             nav="Cover"
             notes="Welcome — hold here a beat."
-            kicker="minsuan.dev"
-            title={<span className="accent-text">Minsunteh</span>}
+            kicker="Portfolio"
+            title={<span className="accent-text">Minsuan Teh</span>}
             subtitle="Machine Learning Platform Engineer"
-            foot="Tencent Games · Kuala Lumpur"
+              foot="Tencent · Kuala Lumpur"
           />
 
           {/* ── About ──────────────────────────────────────────────── */}
@@ -254,8 +254,8 @@ export default function App() {
                   }}
                 >
                   <img
-                    src="/me.png"
-                    alt="Minsunteh"
+                    src="/assets/img/me.png"
+                    alt="Minsuan Teh"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
                 </div>
@@ -285,12 +285,16 @@ export default function App() {
                 {[
                   { label: 'Python', caption: 'Core language, AI/ML pipelines' },
                   { label: 'PyTorch', caption: 'Model development, RL training' },
-                  { label: 'Machine Learning', caption: 'DNN, RL, NLP, generative AI' },
+                  { label: 'TensorFlow', caption: 'ML models, NLP' },
+                  { label: 'C++', caption: 'Sensor development, performance systems' },
                   { label: 'SQL', caption: 'Database querying, ELK pipelines' },
-                  { label: 'C++', caption: 'Performance-critical systems' },
-                  { label: 'Solidity', caption: 'Smart contract development' },
-                  { label: 'FFmpeg', caption: 'Audio processing, TTS pipelines' },
                   { label: 'ELK Stack', caption: 'Elasticsearch, Logstash, Kibana' },
+                  { label: 'Redis', caption: 'Caching, real-time data' },
+                  { label: 'RabbitMQ', caption: 'Message queuing, log forwarding' },
+                  { label: 'Microsoft Azure', caption: 'Event Hub, Blob Storage, managed identity' },
+                  { label: 'Amazon AWS', caption: 'CloudWatch, RDS, S3 integrations' },
+                  { label: 'Kubernetes', caption: 'Container orchestration, deployment' },
+                  { label: 'Docker', caption: 'Containerization, local dev' },
                 ].map((s, i) => (
                   <div className="stat-cell" key={i}>
                     <div className="stat-card">
@@ -330,7 +334,12 @@ export default function App() {
                     body: 'Tencent Games — Developing internal AI tools and platforms for generative audio workflows, knowledge management, and data integration pipelines.',
                   },
                   {
-                    time: '2023 — 2024',
+                    time: '2024 — 2026',
+                    title: 'Software Engineer',
+                    body: 'InsiderSecurity — Automated UEBA platform: risk scoring optimization, cloud integrations (Azure/AWS), sensorless pipeline, Kubernetes migration, C++ sensor enhancements.',
+                  },
+                  {
+                    time: '2023',
                     title: 'Global Software Service Engineer',
                     body: 'Huawei GSRC — Convergent Billing System harmonization for CelcomDigi merger. HTTP testing, SQL database manipulation, GUI validation.',
                   },
@@ -443,7 +452,7 @@ export default function App() {
             </Reveal>
             <Reveal delay={0.25}>
               <a
-                href="/cv.pdf"
+                href="/assets/pdf/EngineeringResumes.pdf"
                 download
                 style={{
                   display: 'inline-flex',
@@ -477,13 +486,171 @@ export default function App() {
           </Slide>
 
           {/* ── Close / CTA ────────────────────────────────────────── */}
-          <Quote
-            nav="Connect"
-            notes="Read it. Let the contact links sink in."
-            text="Let's connect and delve deeper into the fascinating worlds of technology, gaming, and music!"
-            name="Minsunteh"
-            role="minsuan.dev"
-          />
+          <Slide center nav="Connect">
+            <Reveal>
+              <div className="kicker" style={{ marginBottom: 14, textAlign: 'center' }}>
+                Connect
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontSize: 'clamp(32px, 4.8vw, 60px)',
+                  marginInline: 'auto',
+                  marginBottom: 20,
+                }}
+              >
+                <span className="accent-text">Find out more.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p
+                className="subhead"
+                style={{ marginTop: 18, textAlign: 'center', maxWidth: '38ch', marginInline: 'auto' }}
+              >
+                Projects, publications, and detailed experience on my main portfolio site.
+              </p>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  gap: 'clamp(12px, 2vw, 16px)',
+                  marginTop: 'clamp(28px, 5vh, 44px)',
+                }}
+              >
+                <a
+                  href="https://minsuan96.github.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 36px',
+                    borderRadius: '999px',
+                    border: '1px solid var(--hair)',
+                    background: 'var(--surface)',
+                    color: 'var(--primary)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'clamp(14px, 1.4vw, 17px)',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+                    e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--hair)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  minsuan96.github.io ↗
+                </a>
+                <a
+                  href="https://github.com/MinSuan96"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 36px',
+                    borderRadius: '999px',
+                    border: '1px solid var(--hair)',
+                    background: 'var(--surface)',
+                    color: 'var(--fg-muted)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'clamp(14px, 1.4vw, 17px)',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+                    e.currentTarget.style.color = 'var(--primary)';
+                    e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--hair)';
+                    e.currentTarget.style.color = 'var(--fg-muted)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  GitHub ↗
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/minsuan-teh-8a0a31199/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 36px',
+                    borderRadius: '999px',
+                    border: '1px solid var(--hair)',
+                    background: 'var(--surface)',
+                    color: 'var(--fg-muted)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'clamp(14px, 1.4vw, 17px)',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+                    e.currentTarget.style.color = 'var(--primary)';
+                    e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--hair)';
+                    e.currentTarget.style.color = 'var(--fg-muted)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  LinkedIn ↗
+                </a>
+                <a
+                  href="mailto:minsuan1104@hotmail.com"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 36px',
+                    borderRadius: '999px',
+                    border: '1px solid var(--hair)',
+                    background: 'var(--surface)',
+                    color: 'var(--fg-muted)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'clamp(14px, 1.4vw, 17px)',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+                    e.currentTarget.style.color = 'var(--primary)';
+                    e.currentTarget.style.boxShadow = '0 0 30px -10px color-mix(in srgb, var(--primary) 40%, transparent)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--hair)';
+                    e.currentTarget.style.color = 'var(--fg-muted)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  Email ↗
+                </a>
+              </div>
+            </Reveal>
+          </Slide>
         </Deck>
       )}
     </div>
