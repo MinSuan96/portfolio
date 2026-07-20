@@ -295,6 +295,9 @@ export default function App() {
                   { label: 'Amazon AWS', caption: 'CloudWatch, RDS, S3 integrations' },
                   { label: 'Kubernetes', caption: 'Container orchestration, deployment' },
                   { label: 'Docker', caption: 'Containerization, local dev' },
+                  { label: 'Java', caption: 'Tutoring, backend development' },
+                  { label: 'Algorithms', caption: 'Data structures, algorithmic design' },
+                  { label: 'Ruby', caption: 'Automation, tooling' },
                 ].map((s, i) => (
                   <div className="stat-cell" key={i}>
                     <div className="stat-card">
